@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="css/register.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <form id="register" >
+
+        <div class="user_logo">
+            <i class="fa fa-user"></i>
+        </div>
+        <h1>Register</h1>
+        
+            <label for ="navn" class="user">Navn</label> 
+            <input type="text" id="navn" name="navn" required>
+        
+        
+            <label for ="email"class="user">Email</label> 
+            <input type="email" id="email" name="email" required>
+        
+        
+            <label for ="password"class="user">Password</label> 
+            <input type="password" id="password" name="password"  required> 
+        
+        <button type="submit">Register</button>
+        <div class="link">
+        <a href="/login.html">Login</a>
+        </div>
+    </form>
+  <script>
+      document.getElementById("register").addEventListener("submit", (event) => {
+    event.preventDefault();
+    const navn = document.getElementById('navn').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    const user ={ 
+        navn: navn,
+        email: email,
+        password: password,
+    }
+
+    fetch("http://localhost:3000/register", {
+    method: "POST",
+    headers: {
+        "content-type": "application/json",
+
+    },
+    body: JSON.stringify(user)
+    })
+    .then((response) => response.json())
+    .then((response) => {
+        if (response) {
+          location.href = "/login";
+          console.log(response)
+        }
+    })
+    .catch(() => {
+        window.alert("Der skete en fejl");
+      });
+})
+  </script>
+</body>
+</html>
