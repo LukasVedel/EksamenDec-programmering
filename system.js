@@ -43,4 +43,27 @@ function saveuser(user, res){
 
 }
 
-module.exports = {saveuser}
+
+function login(email, password, res){
+    fs.readFile('json.json', (error, allebruger) => {
+        if(error){
+            console.log('Error ved login', error)
+            res.send('Kunne ikke login')
+        }else {
+            const parsedUsers = JSON.parse(allebruger)
+            for (var i = 0; i < parsedUsers.length; i++){
+                if(email === parsedUsers[i].email && password === parsedUsers[i].password){
+                    res.send("bruger kom ind")
+                   
+                }
+            }
+        } res.status(401).end();
+    }) 
+}
+
+
+
+
+
+
+module.exports = {saveuser,login}
