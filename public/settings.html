@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+    <script src= "clint.js"></script>
+    <script src= "init.js"></script>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body onload="userProduct()">
+    
+    <header class="header">
+
+        <a href="#" class="logo">
+            <img src="css/img/4571bf8e100a1b5253b6dd545e43c77b.jpeg" >
+        </a>
+
+        <nav class="navbar">
+            <a href="/">home</a>
+            <a href="#about">about</a>
+            <a href="/myProduct">Your products</a>
+            <a href="/settings">settings</a>
+            <a href="#review">review</a>
+            <a href="#contact">contact</a>
+        </nav>
+
+        <div class="icons">
+            <div class="fas fa-search" id="search-btn"></div>
+            <div class="fas fa-shopping-cart" id="cart-btn"></div>
+            <div class="fas fa-bars" id="menu-btn"></div>
+        </div>
+
+
+    </header>
+
+    <section class="home" id="home">
+        <div class="content">
+            <h1>
+                PROVISION
+            </h1>
+        </div>
+    </section>
+    
+    <form id="form">
+		<h1 class="text">Settings</h1>
+			<label>navn</label>
+			<input type="text" id='navn' name="navn" placeholder="navn">
+			
+
+			<label>Email </label>
+			<input type="email" id='email' name="email" placeholder="aaaa@gmail.com">
+			
+
+			<label>Password</label>
+			<input type="text" id="password" name="password" >
+			
+
+			<button class="regbtn" type ="reset">Reset</button>
+            <input type="submit" placeholder="submit">
+        	</form>
+	<br><br>
+      <button onclick="deleteUser()" class="regbtn" type="submit" id="delete">Delete user</button>
+      <br><br><br><br>
+
+      
+
+      <p>All your active products</p>
+      <div id="allProducts"></div>
+    
+<script>
+    function deleteUser() {
+        fetch("http://localhost:3000/deletebruger", {
+          method: "DELETE",
+        })
+          .then((response) => response.text())
+          .then((response) => {
+            if (response) {
+            location.href = "/login";
+            window.alert("user deleted");
+            } 
+          })
+          .catch(() => {
+            window.alert("Der skete en fejl");
+        });
+    }
+
+
+    document.getElementById("form").addEventListener("submit", (event) => {
+            event.preventDefault();
+            const navn = document.getElementById("navn").value;
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value
+
+            const user = {
+                navn: navn,
+                email: email,
+                password: password
+            }
+            fetch("http://localhost:3000/updateUser", {
+                method: "POST",
+                headers: {
+                "Content-Type": "application/json",
+                },
+                body: JSON.stringify(user)
+        }) 
+        .then((response) => response.text())
+          .then((response) => {
+            if (response) {
+            location.href = "/settings";
+            window.alert("user updated");
+            }   
+        })
+        .catch(() => {
+          window.alert("Der skete en fejl");
+        });
+    })
+
+</script>
+
+</body>
+</html>
