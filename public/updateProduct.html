@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/updateProduct.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    
+    <header class="header">
+
+        <a href="#" class="logo">
+            <img src="css/img/4571bf8e100a1b5253b6dd545e43c77b.jpeg" >
+        </a>
+
+        <nav class="navbar">
+            <a href="/">home</a>
+            <a href="#about">about</a>
+            <a href="/myProduct">Produkt</a>
+            <a href="/settings">settings</a>
+            <a href="#review">review</a>
+            <a href="#contact">contact</a>
+        </nav>
+
+        <div class="icons">
+            <div class="fas fa-search" id="search-btn"></div>
+            <div class="fas fa-shopping-cart" id="cart-btn"></div>
+            <div class="fas fa-bars" id="menu-btn"></div>
+        </div>
+
+
+    </header>
+
+    <section class="home" id="home">
+        <div class="content">
+            <h1>
+                PROVISION
+            </h1>
+        </div>
+
+    </section>
+    <main class="form-product">
+        <form id="product-form">
+
+            <h1 class="text"> update products</h1>
+
+            <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input type="text"  id="title" placeholder="title" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="productCategoryInput" class="form-label">Category</label>
+                <select id="category" name="category" required>
+                    <option value="PC">PC</option>
+                    <option value="Laptop">Laptop</option>
+                    <option value="Hardware">Hardware</option>
+                  </select>	
+            </div>
+
+            <div class="mb-3">
+                <label for="productPriceInput" class="form-label">Price</label>
+                <input type="number" class="form-control" id="Price"  name= "Price" placeholder="Price" required>
+            </div>
+            <button type="submit" class="btn btn-warning">Submit</button>
+
+            <button class="regbtn" type ="reset">Reset</button>
+        </form>
+    </main>
+
+<script>
+    document.getElementById("product-form").addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        const path = window.location.pathname;
+        const Id = path.substring(15)
+        
+
+
+        const title = document.getElementById("title").value
+        const category = document.getElementById("category").value;
+        const price = document.getElementById("Price").value
+
+        const update = {
+                title: title,
+                category: category,
+                price: price,
+                Id: Id
+            }
+
+        fetch("http://localhost:3000/updateProducts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(update)
+    })
+    .then((response) => response.text())
+    .then((response) => {
+
+    if (response) {
+
+    location.href = "/";
+
+    window.alert("Updated product");
+    } 
+    })
+    .catch(() => {
+        window.alert("Cant update product");
+    });
+})
+
+</script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,99 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    height:100vh;
+    font-family: sans-serif;
+    background: url(img/1_7F50Qc-ysFgy6tCjUyruTA.jpeg)
+    no-repeat center center/cover;
+}
+.login_form{
+    width: 320px;
+    height: 520px;
+    background-color: rgba(0, 0, 0, 0.4);
+    border: 1px solid black;
+    position: absolute;
+    top: 50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    box-shadow: 0 0 5px 2px black;
+    padding: 1rem;
+    color: white;
+    border-top: 1px solid white;
+}
+.user_logo{
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    border-radius: 50%;
+    position: relative;
+    left: calc(320px/3.5);
+    top: -70px;
+    box-sizing: border-box;
+
+}
+.user_logo i{
+    font-size: 5rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 1; 
+    color:black;
+}
+.login_form h1{
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 2rem;
+    letter-spacing: 2px;
+    font-weight: 600;
+}
+.login_form label,
+.login_form input,
+.login_form button{
+    display: block;
+    width: 100%;
+    padding: 0.5rem;
+}
+.user{
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-left: -0.5rem;
+}
+.login_form input[type="text"]{
+    font-size: 1rem;
+    
+}
+.login_form input[type="password"]{
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+
+}
+.login_form button[type="submit"]{
+    background-color: red;
+    border: none; 
+    border-radius: 25px;
+    color: white;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+    font-weight: 500;
+}
+.login_form button[type="submit"]:hover{
+    cursor: pointer;
+    background-color: black;
+}
+.result{
+    margin-top: 1.5rem;
+    text-align: center;
+}
+.link a{
+    color: white;
+  
+}
+.link {
+    margin-top: 1rem;
+    text-align: center;
+    font-size: 1.2rem;
+}

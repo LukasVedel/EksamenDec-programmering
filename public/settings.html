@@ -7,10 +7,10 @@
     <title>Document</title>
     <script src= "clint.js"></script>
     <script src= "init.js"></script>
-    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/settings.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
-<body onload="userProduct()">
+<body onload="allMyProducts()">
     
     <header class="header">
 
@@ -21,7 +21,7 @@
         <nav class="navbar">
             <a href="/">home</a>
             <a href="#about">about</a>
-            <a href="/myProduct">Your products</a>
+            <a href="/newProduct">Your products</a>
             <a href="/settings">settings</a>
             <a href="#review">review</a>
             <a href="#contact">contact</a>
@@ -41,36 +41,44 @@
             <h1>
                 PROVISION
             </h1>
+            <h2>
+                Update profil
+            </h2>
         </div>
     </section>
     
     <form id="form">
-		<h1 class="text">Settings</h1>
-			<label>navn</label>
+		<h1 >Settings</h1>
+        <div class="mb-3">
+			<label class="overskrift">navn</label>
 			<input type="text" id='navn' name="navn" placeholder="navn">
-			
-
-			<label>Email </label>
+        </div>
+        <div class="mb-3">
+			<label class="overskrift">Email </label>
 			<input type="email" id='email' name="email" placeholder="aaaa@gmail.com">
 			
-
-			<label>Password</label>
-			<input type="text" id="password" name="password" >
-			
+        </div>
+        <div class="mb-3">
+			<label class="overskrift">Password</label>
+			<input type="text" id="password" name="password" placeholder="password">
+        </div>
 
 			<button class="regbtn" type ="reset">Reset</button>
-            <input type="submit" placeholder="submit">
+            <input type="submit" placeholder="submit" class="regbtn">
         	</form>
-	<br><br>
+	
       <button onclick="deleteUser()" class="regbtn" type="submit" id="delete">Delete user</button>
-      <br><br><br><br>
-
       
+
+      <div id="products" class="products"> 
+
+      </div>
 
       <p>All your active products</p>
       <div id="allProducts"></div>
     
 <script>
+
     function deleteUser() {
         fetch("http://localhost:3000/deletebruger", {
           method: "DELETE",
@@ -117,6 +125,67 @@
           window.alert("Der skete en fejl");
         });
     })
+
+
+
+    function updateProduct (Id) {
+        location.href = `/updateProduct/${Id}`;
+      }
+
+
+
+
+    function allMyProducts() {
+
+        let Products;
+
+        fetch("http://localhost:3000/allMyProducts", {
+             method: "GET",
+        })
+        .then((response) => response.json())
+        .then((response) => {
+            if (response) {
+                    var update = '<ul>'
+
+                    response.forEach(function(product) {
+                        update += '<li>' + " " + product.title + " " + product.category + " " + product.price
+                           +  `<button value="${product.Id}" onclick="updateProduct(this.value)" class="delete">` + "Update product"
+                           + '</button>' + `<button value="${product.Id}" onclick="deleteProduct(this.value)" class="delete">` + "Delete" + '</button>'
+                           + '</li>';
+                    });
+                    update += '</ul>';
+
+                    document.getElementById("products").innerHTML = update;
+                }
+        })
+        .catch(() => {
+                window.alert("Der skete en fejl");
+            });
+    }
+
+    function deleteProduct(Id) {
+            let product = {
+                Id: Id
+            }
+
+            fetch("http://localhost:3000/deleteProduct", {
+             method: "DELETE",
+             headers: {
+                 "Content-Type": "application/json"
+             },
+             body: JSON.stringify(product)
+            })
+            .then((response) => response.text())
+            .then((response) => {
+                if (response) {
+                    location.href = "/settings";
+                    window.alert("product deleted");
+                } 
+            })
+            .catch(() => {
+                window.alert("Der skete en fejl prøvede at slette");
+            });
+        }
 
 </script>
 

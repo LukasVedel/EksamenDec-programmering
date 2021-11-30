@@ -4,7 +4,9 @@ const app = express();
 app.use(express.json());
 const system = require('./system')
 var uniqid = require('uniqid'); 
+app.use(express.static('public'))
 
+/////// main siden hvor du også kan logout\\\\\\\\
 app.get('/', (req, res) =>{
     const authentication = system.authentication();
 
@@ -15,6 +17,16 @@ app.get('/', (req, res) =>{
     }
 });
 
+app.post('/logout', (req, res) => {
+
+    
+    system.logout(res)
+})
+
+
+
+
+/////////////// oprettelse af profil \\\\\\\\\\\\\\\
 app.get('/register', (req, res) =>{
     const authentication = system.authentication();
 
@@ -35,6 +47,9 @@ app.post('/register', (req, res) => {
     system.saveUser(nybruger, res)
 })
 
+
+
+//////////////// logge ind til din profil \\\\\\\\\\\\\\
 app.get('/login', (req, res) =>{
     const authentication = system.authentication();
 
@@ -52,16 +67,18 @@ app.post('/login', (req, res) => {
 
 });
 
+
+
+//settings hvor du kan forskellige ting: updatebruger, deletebruger, updateproduct og delete product \\ 
 app.get('/settings',(req, res) => {
     const authentication = system.authentication();
 
     if(authentication) {
         res.sendFile(path.join(__dirname,'./public/settings.html'));
     } else {
-        res.sendFile(path.join(__dirname,'./public/register.html'));
+        res.sendFile(path.join(__dirname,'./public/login.html'));
     }
 });
-
 
 
 app.post('/updateBruger', (req, res) => {
@@ -79,59 +96,81 @@ app.delete('/deleteBruger', (req, res) => {
 });
 
 
-app.post('/logout', (req, res) => {
 
-    
-    system.logout(res)
-})
 
-//Endpoints to products
-app.get('/myProduct', (req, res) => {
-    res.sendFile(path.join(__dirname, './public/myProduct.html'))
+////////Endpoints to products\\\\\\\\\\\
+
+
+
+//// her er til oprettelse af et nyt produkt \\\\
+app.get('/newProduct', (req, res) => {
+    const authentication = system.authentication();
+
+    if(authentication) {
+        res.sendFile(path.join(__dirname,'./public/newproduct.html'));
+    } else {
+        res.sendFile(path.join(__dirname,'./public/login.html'));
+    }
 });
 
-
-app.post('/myProduct', (req, res) => {
+app.post('/newProduct', (req, res) => {
 
     let Id = uniqid();
 
 
-    let myProduct = {
+    let Product = {
         title: req.body.title,
         category: req.body.category,
         price: req.body.price,
         Id: Id,
         ownerEmail: ""
     };
-    system.myProduct(myProduct, res);
+    system.newProduct(Product, res);
 });
 
+
+
+// her kan man opdatere sit produkt som er under settings\\
 app.get('/updateProduct/:Id',(req, res) => {
-    res.sendFile(path.join(__dirname, './public/updateProduct.html'))
+    const authentication = system.authentication();
+
+    if(authentication) {
+        res.sendFile(path.join(__dirname,'./public/updateProduct.html'));
+    } else {
+        res.sendFile(path.join(__dirname,'./public/login.html'));
+    }
 });
-
-app.delete('/deleteProduct', (req, res) => {
-    system.deleteProduct(req.body.Id, res);
-})
-
-app.get('/allProducts', (req, res) => {
-    system.AllProducts(res);
-})
-
-app.get('/ allMyProducts', (req, res) => {
-    system.allMyProducts(res);
-})
-
 app.post('/updateProducts', (req, res) => {
     let myProduct = {
         title: req.body.title,
         category: req.body.category,
         price: req.body.price,
-        Id: Id,
+        Id: req.body.Id,
         ownerEmail: ""
     };
     system.updateProduct(myProduct, res);
 })
+
+
+
+// fjerne sit produkt som man også kan under settings \\
+app.delete('/deleteProduct', (req, res) => {
+    system.deleteProduct(req.body.Id, res);
+})
+
+
+
+// idk \\
+app.get('/allProducts', (req, res) => {
+    system.allProducts(res);
+})
+
+//idk\\
+app.get('/allMyProducts', (req, res) => {
+    system.allMyProducts(res);
+})
+
+
 
 const PORT = 3000;
 app.listen(PORT, ()  => {
