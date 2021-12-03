@@ -19,12 +19,12 @@
         </a>
 
         <nav class="navbar">
-            <a href="/">home</a>
-            <a href="#about">about</a>
-            <a href="/newProduct">Your products</a>
-            <a href="/settings">settings</a>
-            <a href="#review">review</a>
-            <a href="/updateProduct/">contact</a>
+            <a href="/">Home</a>
+            <a href="#about">About</a>
+            <a href="/newProduct">Make a product</a>
+            <a href="/settings">Settings</a>
+            <a href="#review">Review</a>
+            <a href="#contect">Contact</a>
         </nav>
 
         <div class="icons">
@@ -47,7 +47,7 @@
     <div class="mb-3">
     <label class="category">Category</label>
     <select id="category" name="category" required>
-      <option value="all">all</option>
+      <option value="all">All products</option>
       <option value="PC">PC</option>
       <option value="Laptop">Laptop</option>
       <option value="Hardware">Hardware</option>
@@ -55,7 +55,7 @@
     </div>
 
 
-    <button onclick="getAllProductsWithCategory()" class="regbtn" type="submit" id="submit">products</button>
+    <button onclick="getAllProductsWithCategory()" class="regbtn" type="submit" id="submit"> See products</button>
     <button id="logout" onclick="logout()">Logout</button>
     
   <div id="productContainer" class="productContainer">
@@ -73,7 +73,7 @@
             .then((response) => {
                 if(response) {
                     location.href = "/login";
-                    window.alert("logged out")
+                    window.alert("Du er nu logget ud")
                 }
             })
         } 
@@ -110,12 +110,6 @@
             });
             
         }
-
-        
-
-
-
-
 </script>
 
 </body>

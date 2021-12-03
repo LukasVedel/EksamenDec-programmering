@@ -5,8 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=, initial-scale=1.0">
     <title>Document</title>
-    <script src= "clint.js"></script>
-    <script src= "init.js"></script>
     <link rel="stylesheet" href="css/settings.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
@@ -20,11 +18,11 @@
 
         <nav class="navbar">
             <a href="/">home</a>
-            <a href="#about">about</a>
-            <a href="/newProduct">Your products</a>
-            <a href="/settings">settings</a>
-            <a href="#review">review</a>
-            <a href="#contact">contact</a>
+            <a href="#about">About</a>
+            <a href="/newProduct"> Make a products</a>
+            <a href="/settings">Settings</a>
+            <a href="#review">Review</a>
+            <a href="#contact">Contact</a>
         </nav>
 
         <div class="icons">
@@ -50,7 +48,7 @@
     <form id="form">
 		<h1 >Settings</h1>
         <div class="mb-3">
-			<label class="overskrift">navn</label>
+			<label class="overskrift">Navn</label>
 			<input type="text" id='navn' name="navn" placeholder="navn">
         </div>
         <div class="mb-3">
@@ -69,12 +67,10 @@
 	
       <button onclick="deleteUser()" class="regbtn" type="submit" id="delete">Delete user</button>
       
-
+      <p>All your products</p>
       <div id="products" class="products"> 
 
       </div>
-
-      <p>All your active products</p>
       <div id="allProducts"></div>
     
 <script>
@@ -87,7 +83,7 @@
           .then((response) => {
             if (response) {
             location.href = "/login";
-            window.alert("user deleted");
+            window.alert("Bruger slettet");
             } 
           })
           .catch(() => {
@@ -118,7 +114,7 @@
           .then((response) => {
             if (response) {
             location.href = "/settings";
-            window.alert("user updated");
+            window.alert("Bruger opdateret");
             }   
         })
         .catch(() => {
@@ -179,7 +175,7 @@
             .then((response) => {
                 if (response) {
                     location.href = "/settings";
-                    window.alert("product deleted");
+                    window.alert("Produkt slettet");
                 } 
             })
             .catch(() => {

@@ -49,7 +49,7 @@ app.post('/register', (req, res) => {
 
 
 
-//////////////// logge ind til din profil \\\\\\\\\\\\\\
+//////////////// logge ind på din profil \\\\\\\\\\\\\\
 app.get('/login', (req, res) =>{
     const authentication = system.authentication();
 
@@ -160,7 +160,7 @@ app.delete('/deleteProduct', (req, res) => {
 
 
 
-// idk \\
+
 app.get('/allProducts', (req, res) => {
     system.allProducts(res);
 })

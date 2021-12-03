@@ -2,7 +2,7 @@ var fs = require('fs')
 
 
 
-// variale som er tilkomlet til alle endpoint og min login funktion så man kun kan komme ind på bestemte sider hvis logget ind 
+// variale som er tilkoblet til alle endpoint og min login funktion så man kun kan komme ind på bestemte sider hvis logget ind 
 var loginEmail = "";
 
 
@@ -46,7 +46,7 @@ function saveUser(user, res) {
        fs.writeFileSync('json.json', jsonBruger);
        res.status(200).send(true);
        } else {
-               console.log('user already exist')
+               console.log('Email er brugt')
                res.status(404).end()
        }
 }
@@ -77,7 +77,7 @@ function login(email, password, res) {
 // her fjerner den indholdet i variablen loginEmail så man bliver logget ud \\
 function logout(res) {
     loginEmail = ""
-    res.send('logged out successfull')
+    res.send(' Du er nu logget ud ')
     return;
 }
 
@@ -105,9 +105,9 @@ function deleteUser(res) {
        // her hvis found er lige med true bruger jeg JSON.stringify og sender den nye sting tilbage til min json.json fil \\
         const jsonBruger = JSON.stringify(parseBruger)
         fs.writeFileSync('json.json', jsonBruger);
-          res.send("User deleted");
+          res.send("Bruger slettet");
     } else {
-        res.send("Could not delete user")
+        res.send("Kunne ikke slette bruger ")
     }
 }
 
@@ -147,7 +147,7 @@ function updateBruger(user, res) {
             const jsonBruger = JSON.stringify(parseBruger)
             fs.writeFileSync('json.json', jsonBruger);
 
-            res.send("Succesfully updated user");
+            res.send("Brugeren er opdateret");
             return;
 
     
@@ -205,7 +205,7 @@ function newProduct (Product, res) {
         const productJson = JSON.stringify(parseBruger)
         fs.writeFileSync('product.json', productJson);
       
-        res.send("Created Product")
+        res.send("Nyt produkt lavet")
         return;
     }
 }
@@ -277,7 +277,7 @@ function updateProduct(updatedProduct, res) {
 
     fs.writeFileSync('json.json', jsonBruger);
             
-    res.send("Succesfully updated ");
+    res.send("Produktet er opdateret ");
 
     return;
 }
@@ -366,7 +366,7 @@ function deleteProduct(Id, res) {
                        // tilføjer arrayet tilbage til json.json \\
                         const jsonUsers = JSON.stringify(parsedUsers);
                         fs.writeFileSync('json.json', jsonUsers);
-                        res.send("Deleted product sucess");
+                        res.send("Du har slettet dit produkt");
                         return;
                     }
                 }

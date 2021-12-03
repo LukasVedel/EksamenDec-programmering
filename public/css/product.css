@@ -129,3 +129,9 @@ button {
     letter-spacing: 1px;
     font-weight: 500;
 }
+.text{
+    font-size: 4rem;
+    color:#fff;
+    text-align: center;
+    margin-top: 5rem;
+}
