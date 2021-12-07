@@ -317,7 +317,7 @@ function allMyProducts(res) {
 
 function deleteProduct(Id, res) {
 
-    let saveProductInDB = false;
+    let saveProduct = false;
 
 //går ind og læser min json fil med produkterne \\
     const allProducts = fs.readFileSync('product.json');
@@ -336,11 +336,11 @@ function deleteProduct(Id, res) {
          // jeg tilføjer arrayet tilbage til product.json \\
             const jsonProducts = JSON.stringify(parsedProducts);
             fs.writeFileSync('product.json', jsonProducts);
-            saveProductInDB = true;
+            saveProduct = true;
         }
     }
 
-    if (saveProductInDB === false) {
+    if (saveProduct === false) {
         res.status(401).end()
         return;
     } else {

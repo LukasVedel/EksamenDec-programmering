@@ -50,6 +50,7 @@ app.post('/register', (req, res) => {
 
 
 //////////////// logge ind på din profil \\\\\\\\\\\\\\
+
 app.get('/login', (req, res) =>{
     const authentication = system.authentication();
 
@@ -140,6 +141,7 @@ app.get('/updateProduct/:Id',(req, res) => {
         res.sendFile(path.join(__dirname,'./public/login.html'));
     }
 });
+
 app.post('/updateProducts', (req, res) => {
     let myProduct = {
         title: req.body.title,
@@ -154,6 +156,7 @@ app.post('/updateProducts', (req, res) => {
 
 
 // fjerne sit produkt som man også kan under settings \\
+
 app.delete('/deleteProduct', (req, res) => {
     system.deleteProduct(req.body.Id, res);
 })
@@ -165,7 +168,8 @@ app.get('/allProducts', (req, res) => {
     system.allProducts(res);
 })
 
-//idk\\
+
+
 app.get('/allMyProducts', (req, res) => {
     system.allMyProducts(res);
 })
