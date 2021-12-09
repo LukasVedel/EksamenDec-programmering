@@ -23,7 +23,7 @@ function saveUser(user, res) {
 // læser min json fil.
     const allebrugere = fs.readFileSync('json.json');
 
-// her ved hjælp af parse går jeg ind i min json fil og laver brugeren til et array. 
+// her ved hjælp af parse går jeg ind i min json fil og laver brugeren til et objekt. 
     const parseBruger = JSON.parse(allebrugere)
 // her laver jeg en variable som er = false hvilket bruges efterfølgende.
     let found = false;
